@@ -1,5 +1,5 @@
 #!/usr/bin/env kwcore
-import tar from '../tar.js'
+import tar from '../../tar.js'
 init()
 
 
