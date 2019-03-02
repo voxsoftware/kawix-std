@@ -8,8 +8,8 @@ It is in a premature stage. You can start testing:
 ```bash
 mkdir @kawix
 cd @kawix
-git clone https://github.com/voxsoftware/kowix-core core
-git clone https://github.com/voxsoftware/kowix-std std
+git clone https://github.com/voxsoftware/kawix-core core
+git clone https://github.com/voxsoftware/kawix-std std
 cd core 
 
 
@@ -17,5 +17,5 @@ cd core
 # don't use --force on production
 
 # this is a basic replication of tar command
-./bin/kwcore --force  "https://raw.githubusercontent.com/voxsoftware/kowix-std/master/compression/example/bin/basic-tar.js" --help
+./bin/kwcore --force  "https://raw.githubusercontent.com/voxsoftware/kawix-std/master/compression/example/bin/basic-tar.js" --help
 ```
