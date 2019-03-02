@@ -16,4 +16,6 @@ cd core
 # using --force to allow always download last changes before executing 
 # don't use --force on production
 
-./bin/kwcore --force  "https://raw.githubusercontent.com/voxsoftware/kowix-std/master/compression/example/bin/basic-tar.js"
+# this is a basic replication of tar command
+./bin/kwcore --force  "https://raw.githubusercontent.com/voxsoftware/kowix-std/master/compression/example/bin/basic-tar.js" --help
+```
