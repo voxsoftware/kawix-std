@@ -1,0 +1,6 @@
+{
+	"name": "@kawix/std-package-uniqid",
+	"dependencies": {
+		"uniqid": "^5.0.3"
+	}
+}
