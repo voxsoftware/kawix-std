@@ -31,6 +31,7 @@ var register= function(){
     }
 }
 
+register()
 exports.default = register 
 exports.CSON= CSON 
 exports.register= register 

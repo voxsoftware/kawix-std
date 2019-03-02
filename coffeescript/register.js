@@ -29,6 +29,7 @@ var register= function(){
     }
 }
 
+register()
 exports.default = register 
 exports.register= register 
 exports.compile = compile 
