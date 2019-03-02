@@ -48,6 +48,13 @@ class Bundle{
         return this.options.packageJsonSupport= value
     }
 
+    get mainScript(){
+        return this.options.mainScript
+    }
+    set mainScript(value){
+        return this.options.mainScript= value
+    }
+
     get ignoreIrrelevantFiles(){
         return this.options.ignoreIrrelevantFiles
     }
@@ -79,13 +86,22 @@ class Bundle{
         }
         
         else{
-            packageJson= `
-                    pe= id.split(".")
-                    if(fileData.length == 1 || (pe.length == 2 && pe[0] == "mod")){
-                        // mark as default
-                        main= "${this.virtualName}" + (id ? ("/"+id) : "")
-                    }  
-            `
+
+            if(this.mainScript){
+                packageJson=`
+                main= ${JSON.stringify(this.mainScript)}
+                main= "${this.virtualName}" + (main ? ("/"+main) : "")
+                `
+            }
+            else{
+                packageJson= `
+                        pe= id.split(".")
+                        if(fileData.length == 1 || (pe.length == 2 && pe[0] == "mod")){
+                            // mark as default
+                            main= "${this.virtualName}" + (id ? ("/"+id) : "")
+                        }  
+                `
+            }
         }
 
         var virtualAdd= `
