@@ -494,6 +494,10 @@ class Registry
 			await fs.renameAsync Path.join(temppath, contents[0]), proposedInstall.folder 
 
 		catch e 
+			if e.message.indexOf("zlib") >= 0
+				# retry 
+				await fs.unlinkAsync(cachedInfo.tarball)
+				return await @_downloadCache result
 			throw e
 		finally 
 			await @_removedir temppath 
