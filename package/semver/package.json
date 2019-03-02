@@ -1,0 +1,6 @@
+{
+	"name": "@kawix/std-package-semver",
+	"dependencies": {
+		"semver": "^5.6.0"
+	}
+}
