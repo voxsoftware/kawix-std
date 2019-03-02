@@ -13,7 +13,7 @@ async function init(){
         console.log("Try 'tar --help' or 'tar --usage' for more information")
         return 
     }
-    else if(options == "--help"){
+    else if(options == "--help" || options == "--usage"){
         console.log(`A basic replication of linux tar command, written using @kawix/core
 Usage: tar [options] [path/to/out/tarball] [file1, file2, ...]
 Example: 
