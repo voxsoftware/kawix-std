@@ -26,6 +26,9 @@ class Registry
 		@installed=[]
 	
 
+	sleep: (timeout= 100)->
+		return new Promise (resolve)-> setTimeout resolve, timeout
+
 	_removedir: (path, retry= 0)->
 		try 
 			files= await fs.readdirAsync(path)
@@ -40,7 +43,7 @@ class Registry
 			
 			await fs.rmdirAsync path 
 		catch e
-			if retry > 2
+			if retry > 15
 				throw e 
 			await @sleep 100
 			return await @_removedir path, retry+1 
