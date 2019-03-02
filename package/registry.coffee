@@ -26,8 +26,7 @@ class Registry
 		@installed=[]
 	
 
-	sleep: (timeout= 100)->
-		return new Promise (resolve)-> setTimeout resolve, timeout
+	
 
 	_removedir: (path, retry= 0)->
 		try 
@@ -45,7 +44,7 @@ class Registry
 		catch e
 			if retry > 15
 				throw e 
-			await @sleep 100
+			await @_sleep 100
 			return await @_removedir path, retry+1 
 			
 		
@@ -248,7 +247,7 @@ class Registry
 		while await @._fileExists(cache.lock)
 			if Date.now() - time > 40000
 				throw new Error("Error waiting access")
-			await _sleep 20
+			await @_sleep 20
 	
 		arg= 
 			cachedInfo: cachedInfo 
