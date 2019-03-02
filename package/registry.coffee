@@ -299,6 +299,14 @@ class Registry
 
 	resolve: (module, version)->
 
+		if not version 
+			i= module.lastIndexOf("@")
+			if i > 0
+				version= module.substring(i+1)
+				module= module.substring(0,i)
+			else 
+				version= "*"
+
 		cacher= Registry.cache[module] 
 		if cacher
 			versions= Object.keys cacher 
@@ -320,21 +328,21 @@ class Registry
 			Registry.cache[moduledesc.name]= Registry.cache[moduledesc.name] ? {}
 			Registry.cache[moduledesc.name][moduledesc.version]= moduledesc
 
-
+		if not moduledesc.packageinfo 
+			pjson= Path.join moduledesc.folder, "package.json"
+			pjson= await fs.readFileAsync(pjson, 'utf8')
+			pjson= JSON.parse pjson 
+			moduledesc.packageinfo= pjson 
+			if pjson.main 
+				moduledesc.main= Path.normalize(Path.join(moduledesc.folder, pjson.main))
+			else 
+				moduledesc.main= Path.join(moduledesc.folder, "index.js")
 
 		if @options.ignoredependencies isnt true  
-			try 
-				
+			try 				
 				if not moduledesc.fullyloaded
-					if not moduledesc.packageinfo 
-						pjson= Path.join moduledesc.folder, "package.json"
-						pjson= await fs.readFileAsync(pjson, 'utf8')
-						pjson= JSON.parse pjson 
-						moduledesc.packageinfo= pjson 
-					
 					await @_resolveDependencies moduledesc, moduledesc.packageinfo 
 					moduledesc.fullyloaded= yes 
-
 			catch e
 				#await @_removedir folder 
 				throw e
