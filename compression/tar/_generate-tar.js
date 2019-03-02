@@ -2,7 +2,7 @@ import Bundler from '../package/bundle.js'
 import Path from 'path'
 
 var init= async function(){
-    var path= Path.join(__dirname, "tar","node_modules")
+    var path= Path.join(__dirname, "node_modules")
     var outfile= Path.join(__dirname, "tar-lowlevel.js")
 
     var bundler= new Bundler(path)
