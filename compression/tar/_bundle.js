@@ -3,7 +3,7 @@ import Path from 'path'
 
 var init= async function(){
     var path= Path.join(__dirname, "node_modules")
-    var outfile= Path.join(__dirname, "tar-lowlevel.js")
+    var outfile= Path.join(__dirname, "lowlevel.js")
 
     var bundler= new Bundler(path)
     bundler.virtualName= 'tar$v$4.4.8/node_modules'

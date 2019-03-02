@@ -9,11 +9,9 @@ async function init(){
     var files= args.slice(1)
     var file , obj={}
 
-    if(options == undefined){
+    if(!options){
         console.log("Try 'tar --help' or 'tar --usage' for more information")
         return 
-        // read from stdin 
-        process.stdin.pipe()
     }
     else if(options == "--help"){
         console.log(`A basic replication of linux tar command, written using @kawix/core
