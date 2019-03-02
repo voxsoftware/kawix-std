@@ -26,18 +26,25 @@ class Registry
 		@installed=[]
 	
 
-	_removedir: (path)->
-		files= await fs.readdirAsync(path)
-		for file in files 
-			ufile= Path.join path, file 
-			stat=await fs.statAsync ufile
-			if stat.isDirectory()
-				await @_removedir ufile 
-				
-			else 
-				await fs.unlinkAsync ufile 
-		
-		await fs.rmdirAsync path 
+	_removedir: (path, retry= 0)->
+		try 
+			files= await fs.readdirAsync(path)
+			for file in files 
+				ufile= Path.join path, file 
+				stat=await fs.statAsync ufile
+				if stat.isDirectory()
+					await @_removedir ufile 
+					
+				else 
+					await fs.unlinkAsync ufile 
+			
+			await fs.rmdirAsync path 
+		catch e
+			if retry > 2
+				throw e 
+			await @sleep 100
+			return await @_removedir path, retry+1 
+			
 		
 
 
